@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
+    <form action="/findTravel" method="post">
+        <label for="departureRegionARR">Region of Departure</label>
+        <select id="departureRegionARR" name="departureRegionARR" required>
+            <option value="ChooseRegion">Choose region of departure</option>
+            <option value="Adamaoua">Adamaoua</option>
+            <option value="Centre">Centre</option>
+            <option value="Est">Est</option>
+            <option value="Extrême-Nord">Extrême-Nord </option>
+            <option value="Littoral">Littoral </option>
+            <option value=" Nord"> Nord</option>
+            <option value="Nord-Ouest">Nord-Ouest</option>
+            <option value="Ouest">Ouest</option>
+            <option value="Sud">Sud </option>
+            <option value="Sud-ouest">Sud-ouest</option>
+        </select>
+        <br><br>
+        <label for="departureTownARR">Departure city/town</label>
+        <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
+
+        <label for="arrivalRegionARR">Region of Arrival</label>
+        <select id="arrivalRegionARR" name="arrivalRegionARR" required>
+            <option value="ChooseRegion">Choose region of arrival</option>
+            <option value="Adamaoua">Adamaoua</option>
+            <option value="Centre">Centre</option>
+            <option value="Est">Est</option>
+            <option value="Extrême-Nord">Extrême-Nord </option>
+            <option value="Littoral">Littoral </option>
+            <option value=" Nord"> Nord</option>
+            <option value="Nord-Ouest">Nord-Ouest</option>
+            <option value="Ouest">Ouest</option>
+            <option value="Sud">Sud </option>
+            <option value="Sud-ouest">Sud-ouest</option>
+        </select>
+        <br><br>
+
+        <label for="arrivalTownARR">Arrival city/town</label>
+        <input type="text" id="arrivalTownARR" name="arrivalTownARR" required><br><br>
+        
+        <label for="dateAndTineDepartureARR">Date and hour of departure</label>
+        <input type="datetime-local" id="dateAndTineDepartureARR" name="dateAndTineDepartureARR" required><br><br>
+    </form>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styleHomePage.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="AproposBloc">
+        <h1 class="AproposDeTopDepartTitre"> À propos de Top Départ</h1>
+        <div class="AproposDeTopDepartTexte"></div>
+    </div>
+    <div class="nousVousGarantissons">
+        <h2 class="nousVousGarantissonsTitre"> Nous vous garantissons</h2>
+        <div class="nousVousGarantissonsTexte">
+            <div class="secuIdentites">
+                <h3>Identification et authentification</h3>
+                <div class="secuIdentitesTeste">Tous nos membres sont identifiés et authentifiés. Devenir membre de TO Départ est gartuit. 
+                    cliquer sur devenir membre pour vous inscrire
+                </div>
+            </div>
+            <div class="confidentialités"></div>
+            <div class="serviceDeQualite"></div>
+        </div>
+        <div class="testimonialsBloc">
+
+        </div>
+    </div>
+
+
+
+    <div class="listeDesVoyagesContainer">
+        ${userLogIn.travels.map((travel, index) => `
+            <div class="resultListVaoyagePublies">
+                
+                <div class="resultTimeDate">
+                    <p>${travel.dateAndTineDeparture}</p>
+                </div>
+                <div class="resultDepartureRegion">
+                    <p>${travel.departureRegion}, ${travel.departureTown}</p>
+                    <p>${travel.meet}</p>
+                    <br>
+                    <br>
+                    <p>${travel.arrivalRegion}, ${travel.arrivalTown}</p>
+                    <p>${travel.dropoffPoint}</p>
+                </div>
+                <div class="PriceAndPlacesResult">
+                    <p>${travel.price} FCFA</p>
+                    <p>${travel.seats} seats available</p>
+                </div>
+</body>
+</html>

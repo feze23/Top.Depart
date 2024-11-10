@@ -1,0 +1,467 @@
+body {
+    background-color: whitesmoke;
+    background-size: cover; /* Ajuste l'image pour couvrir tout l'écran */
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+
+/* Réinitialisation des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+
+.logo { 
+    width: 100px;
+    margin-top: -20px;
+    
+}
+
+.logo img {
+    height: 60px;
+    width: 100%;
+    object-fit: cover;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    margin-left: 50px;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex; 
+    align-items: flex-end; 
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+li.dropdown a, .announceAtrip, .FindAtrip {
+    text-decoration: none; 
+}
+
+.travelbooking li{
+    list-style: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    
+}
+
+.nav-links a {
+    color: black; 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: green; 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.burger {
+    display: none;
+    cursor: pointer; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    height: 21px; 
+}
+
+.burger div {
+    width: 25px; 
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+.contactMenu { 
+    width: 10%; 
+    height: 30px; 
+    text-align: center;
+    padding-top: 4px;
+    background-color: green;
+    border-radius: 6px; 
+    margin-top: 30px; 
+}
+
+.contactMenu a{
+    color: white;
+    text-decoration: none;
+    cursor:pointer; 
+}
+
+
+.contactMenu a:hover{
+    color: white;
+    text-decoration: none;
+    cursor:pointer; 
+}
+
+
+.loginBtn{
+    display: none;
+}
+
+.announceTravelForm{
+    display: none;
+}
+
+.registerPage{
+    display: none;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out;
+}
+
+.loginPage{
+    display: none;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out;
+    
+    
+}
+
+.loginPageFail{
+    display: block;
+    
+}
+/*liste des voyages annoncés*/
+
+.covoiturageAnnoncé{
+    cursor: pointer;
+}
+.listeDesVoyagesContainer, .listeDesVoyagesBooker{
+    display: none;
+    border:2px solid red; 
+}
+
+/* Style général pour le formulaire */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(247, 237, 52, 0.818);
+    
+    
+}
+
+.loginForm{
+    width: 28%;
+    height: 15em;
+    
+}
+
+.loginButton{
+    width: 16%;
+    height: 25px;
+    background-color: #f9f9f9;
+    border: 2px  solid #cacaca;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(247, 237, 52, 0.818);
+}
+/* Style pour les titres */
+h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style pour les labels */
+label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Style pour les inputs */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="color"] {
+    height: 40px; /* Hauteur ajustée */
+    width: 50px; /* Largeur réduite */
+    padding: 0; /* Supprimer le rembourrage */
+    border: none; /* Supprimer la bordure */
+}
+
+/* Style pour le bouton de soumission */
+input[type="submit"], input[type="reset"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #0056b3;
+}
+
+.FindTraveilForm{
+    display: none;
+}
+
+.resultTitle{
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.resultContainer{
+    display: grid; 
+    grid-template-columns: auto auto auto; 
+}
+
+/* Style pour chaque élément de la grille */
+.result{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(247, 237, 52, 0.818);
+    width: 70%;
+}
+.resultListVaoyagePublies, .resultListVaoyageBooker{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 35px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(247, 237, 52, 0.818);
+    width: 90%;
+}
+
+.result:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 20px rgba(247, 237, 52, 0.818);
+}
+
+.resultDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    height: 110%;
+    width: 40%;
+    position: absolute;
+    left: 29%;
+    top: 5%;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(247, 237, 52, 0.818);
+}
+
+.resultTimeDate, .resultDepartureRegion, .PriceAndPlacesResult, .resultTimeDatePublie{
+  
+    box-shadow: 0px 0px 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+}
+.resultTimeDate{
+    height: 50px;
+}
+.resultTimeDatePublie{
+    height: 85px;
+}
+
+.voirDetail{
+    text-decoration: none;
+}
+
+.departureDetails, .arrivalDetails, .carDetail, .licenceDetail, .SeatDetail, .booking
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px
+}
+.departureDetails:hover, .arrivalDetails:hover, .PriceAndPlacesResult:hover, .carDetail:hover, .licenceDetail:hover, 
+.SeatDetail:hover, .booking:hover{
+   cursor: pointer;
+}
+
+.booking{
+    height: 230px;
+}
+.arrivalDetails h2, .SeatDetail h2{
+    margin-right: 20px;
+}
+.bookingForm {
+    height: 254px;
+}
+
+
+
+
+
+
+
+.popup, .popupBooking {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 9999; /* Assurez-vous que la fenêtre pop-up est au-dessus de tout le reste */
+}
+.popupBooking {
+    top: 75%;
+    left: 80%;
+}
+
+.popup-content, .popup-contentBooking {
+    text-align: center;
+}
+
+.close, .closeBooking {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+/* Styles pour la barre de navigation */
+.navbare {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: white;
+    border: 2px solide red;
+    padding: 10px 20px;
+}
+
+/* Style du logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 5%;
+    right: 85%;
+}
+
+/* Styles pour les liens de la barre de navigation */
+.navbare .annoncerVoyage,
+.navbare .rechercheVoyage,
+.navbare .notification,
+.navbare .profilFoto {
+    cursor: pointer;
+    margin-left: 20px;
+}
+.navbare .annoncerVoyage{
+    border: 2px solid green;
+}
+.navbare .rechercheVoyage{
+    border: 2px solid yellow;
+}
+.navbare .notification{
+    border: 2px solid black;
+}
+.navbare .profilFoto{
+    border: 2px solid red;
+    width: 10%;
+    height: 60px;
+}
+ion-icon {
+    font-size: 64px;
+    margin-left: 20px;
+  }
+
+/* Style pour le texte de bienvenue */
+.Bienvenu {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Styles pour la barre de liens du compte utilisateur */
+.navbarLink {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    
+}
+.nav-links{
+    font-size: 1.15em;
+}
+
+/* Styles pour les sections de covoiturage annoncé, réservé et effectué */
+.covoiturageAnnoncé,
+.covoiturageReserve,
+.covoiturageFait {
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Styles pour les titres et les nombres dans les sections de covoiturage */
+.covoiturageAnnoncéTitre,
+.covoiturageReserveTitre,
+.covoiturageFaitTitre,
+.covoiturageAnnoncéNbr,
+.covoiturageReserveNbr,
+.covoiturageFaitNbr {
+    margin-bottom: 5px;
+}
+
+/* Style pour les nombres dans les sections de covoiturage */
+.covoiturageAnnoncéNbr,
+.covoiturageReserveNbr,
+.covoiturageFaitNbr {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.travelbooking{
+    width: 90%;
+    height: 100px;
+    border: 2px solid red; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
