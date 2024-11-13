@@ -111,298 +111,340 @@ app.post('/login', async(req, res)=>{
         const currentDate = new Date().toISOString().slice(0, 16);
 
         // Compter les voyages dont la date de départ est postérieure ou égale à la date actuelle
-        let totalVoyageAnnonce = await db.collection("register").countDocuments({
+        let totalVoyageAnnonceNbr = await db.collection("register").countDocuments({
         dateAndTineDeparture: { $gte: currentDate }
         });
+
+        let totalVoyageListPublie = [] 
+        totalVoyageListPublie=  await db.collection("register").find({
+            dateAndTineDeparture: { $gte: currentDate }
+        }).toArray();
+
+        let nombreTotalDeVoyagePublieValide =''; 
+
+       totalVoyageListPublie.forEach(travel => {
+        const departureDateTime = new Date(travel.dateAndTineDeparture);
+        const departureTime = formatTime(departureDateTime.getHours()) + ':' + formatTime(departureDateTime.getMinutes());
+
+        nombreTotalDeVoyagePublieValide += `
+       
+            <div class="resultTotalVoyageListPublie">
+                <div class="resultTimeDate">
+                    <p>${departureTime}</p>
+                </div>
+                <div class="resultDepartureRegion">
+                    <p>${travel.departureTown}</p>
+                    <p>${travel.meet}</p>
+                    <br>
+                    <br>
+                    <p>${travel.arrivalTown}</p>
+                    <p>${travel.dropoffPoint}</p>
+                </div>
+                <div class="PriceAndPlacesResult">
+                    <p>${travel.price} FCFA</p>
+                    <p>${travel.seats} seats available</p>
+                </div>
+                <a class="voirDetail" href="/travelDetails?id=${travel._id}">Voir les détails</a>
+            </div>
+       
+        `;
+       
+       
+        //console.log( nombreTotalDeVoyagePublieValide ); 
+    });
+
 
         let voyageAnnonce = await db.collection("register").countDocuments(); 
         const collectionClients = db.collection("clients"); 
         const  dbResult = await collectionClients.find().toArray();
         
-          
+       
         dbResult.forEach(userLogIn =>{
-        if(userLogIn.emailRegister === emailInputLogin && userLogIn.passwordRegister ===  passwordInputLogin) {  
-
-            userActif = userLogIn.usernameRegister; 
-            userActifId = userLogIn._id;
-            voyagePublies = userLogIn.travels.length; 
-            voageEffectue =  userLogIn.bookings.length; 
-            voyageannonce = totalVoyageAnnonce;  
-            
-
-            if (userLogIn.travels && userLogIn.travels.length > 0){
-                    logginSucess= ` <div class="Bienvenu">
-                
-                    <h2>Salut ${userActif}, ravis de te revoir parmi nous </h2></div>
-
-                    <nav class="navbarLink">
-                        <div class="covoiturageAnnoncé">
-                        <div class="covoiturageAnnoncéTitre">Voyage annoncé</div>
-                        <div class="covoiturageAnnoncéNbr">${voyagePublies}</div>
-                        </div>
-                        <div class="covoiturageReserve">
-                        <div class="covoiturageReserveTitre">Voyage Reservé</div>
-                        <div class="covoiturageReserveNbr">${ voageEffectue}</div>
-                        </div>
-                        <div class="covoiturageFait">
-                        <div class="covoiturageFaitTitre">Voyage Effectué </div>
-                        <div class="totalCovoiturageAnnoncé">${voyageannonce}</div>
-                        </div>
-                    </nav>
-            
-                    <div class="travelbooking">
-                            <li><a href="#" class="announceAtrip">Announce a Trip</a></li>
-                            <li><a href="#" class="FindAtrip">Find a Trip</a></li>
-                    </div>
-
-                    <div class="announceTravelForm">
-                    <h2 class="annonceVoyageTitre"> Provide more details on your trip</h2>
-                    <form action="/submit" method="post">
-                        <label for="username">Username</label>
-                        <input id="username" name="username" type="text"><br><br>
-                        <label for="departureRegion">Region of Departure</label>
-                        <select id="departureRegion" name="departureRegion" required>
-                            <option value="ChooseRegion">Choose region of departure</option>
-                            <option value="Adamaoua">Adamaoua</option>
-                            <option value="Centre">Centre</option>
-                            <option value="Est">Est</option>
-                            <option value="Extrême-Nord">Extrême-Nord </option>
-                            <option value="Littoral">Littoral </option>
-                            <option value=" Nord"> Nord</option>
-                            <option value="Nord-Ouest">Nord-Ouest</option>
-                            <option value="Ouest">Ouest</option>
-                            <option value="Sud">Sud </option>
-                            <option value="Sud-ouest">Sud-ouest</option>
-                        </select>
-                    <br><br>
-                    <label for="departureTown">Departure city/town</label>
-                    <input type="text" id="departureTown" name="departureTown" required ><br><br>
-
-                    <label for="arrivalRegion">Region of Arrival</label>
-                    <select id="arrivalRegion" name="arrivalRegion" required>
-                        <option value="ChooseRegion">Choose region of arrival</option>
-                        <option value="Adamaoua">Adamaoua</option>
-                        <option value="Centre">Centre</option>
-                        <option value="Est">Est</option>
-                        <option value="Extrême-Nord">Extrême-Nord </option>
-                        <option value="Littoral">Littoral </option>
-                        <option value=" Nord"> Nord</option>
-                        <option value="Nord-Ouest">Nord-Ouest</option>
-                        <option value="Ouest">Ouest</option>
-                        <option value="Sud">Sud </option>
-                        <option value="Sud-ouest">Sud-ouest</option>
-                    </select>
-                    <br><br>
-
-                    <label for="arrivalTown">Arrival city/town</label>
-                    <input type="text" id="arrivalTown" name="arrivalTown" required><br><br>
-                    <label for="meet">Meet point</label>
-                    <input type="text" id="meet" name="meet" required ><br><br>
-                    <label for="dateAndTineDeparture">Date and hour of departure</label>
-                    <input type="datetime-local" id="dateAndTineDeparture" name="dateAndTineDeparture" required><br><br>
-                    <label for="drop-offPoint">Drop-off point</label>
-                    <input type="name" id="drop-offPoint" name="dropoffPoint" required ><br><br>
-                    <label for="seats">Available seats</label>
-                    <input type="number" id="seats" name="seats" required><br><br>
-                    <label for="price">Contribution in FCFA</label>
-                    <input type="number" id="price" name="price" required><br><br>
-                    <label for="paiementMode">paiement Mode</label>
-                    <select id="paiementMode" name="paiementMode" required>
-                        <option value="">Choose et paiement Mode</option>
-                        <option value="cash">Cash</option>
-                        <option value="Orange Money">Orange Money</option>
-                        <option value="momo">Mobile Money</option>
-                        <option value="card">Visa/Master Card</option>
-                        <option value="paypal">Paypal</option>
-                    </select>
-                <br><br>
-                <label for="driverLicenceNbr">Driver licence number</label>
-                <input id="driverLicenceNbr" type="number" name="driverLicenceNbr" minlength="12" maxlength="12"><br><br>
-                <label for="expireDate">Expire date</label>
-                <input type="date" id="expireDate" name="expireDate"><br><br>
-                <label for="issuePlace">Place of Issue</label>
-                <input type="name" id="issuePlace" name="issuePlace"><br><br>
-                <label for="Carimmatriculation">Car's immatriculation</label>
-                <input type="name" id="Carimmatriculation" name="Carimmatriculation"><br><br>
-                <label for="CarModel">Car's Model</label>
-                <input type="name" id="CarModel" name="CarModel"><br><br>
-                <label for="CarColor">Car's color</label>
-                <input type="string" id="CarColor" name="CarColor"><br><br>
-                <input type="submit" value="submit">
-                <input type="reset" value="reset">
-
-            </form>
-            
-            </div>
-
-                       
-
-            <div class="FindTraveilForm">
-                <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
-            <form action="/findTravel" method="post">
-                <label  for="departureRegionARR">Region of Departure</label>
-                <select id="departureRegionARR" name="departureRegionARR" required>
-                    <option value="ChooseRegion">Choose region of departure</option>
-                    <option value="Adamaoua">Adamaoua</option>
-                    <option value="Centre">Centre</option>
-                    <option value="Est">Est</option>
-                    <option value="Extrême-Nord">Extrême-Nord </option>
-                    <option value="Littoral">Littoral </option>
-                    <option value=" Nord"> Nord</option>
-                    <option value="Nord-Ouest">Nord-Ouest</option>
-                    <option value="Ouest">Ouest</option>
-                    <option value="Sud">Sud </option>
-                    <option value="Sud-ouest">Sud-ouest</option>
-                </select>
-                <br><br>
-                <label for="departureTownARR">Departure city/town</label>
-                <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
-
-                <label for="arrivalRegionARR">Region of Arrival</label>
-                <select id="arrivalRegionARR" name="arrivalRegionARR" required>
-                    <option value="ChooseRegion">Choose region of arrival</option>
-                    <option value="Adamaoua">Adamaoua</option>
-                    <option value="Centre">Centre</option>
-                    <option value="Est">Est</option>
-                    <option value="Extrême-Nord">Extrême-Nord </option>
-                    <option value="Littoral">Littoral </option>
-                    <option value=" Nord"> Nord</option>
-                    <option value="Nord-Ouest">Nord-Ouest</option>
-                    <option value="Ouest">Ouest</option>
-                    <option value="Sud">Sud </option>
-                    <option value="Sud-ouest">Sud-ouest</option>
-                </select>
-                <br><br>
-
-                <label for="arrivalTownARR">Arrival city/town</label>
-                <input type="text" id="arrivaPlTownARR" name="arrivalTownARR" required><br><br>
-                
-                <label for="dateAndTineDepartureARR">Date and hour of departure</label>
-                <input type="datetime-local" id="dateAndTineDepartureARR" name="dateAndTineDepartureARR" required><br><br>
-
-                <input type="submit" value="submit">
-                <input type="reset" value="reset">
-            </form>
-            </div>
-
-
-               <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-                `
-               
-               logginSucess += `
-               <div class="listeDesVoyagesContainer">
-                   ${userLogIn.travels.map((travel, index) => `
-                       <div class="resultListVaoyagePublies">
-                           
-                          <div class="resultTimeDatePublie">
-                                  <p>Départ le</p>
-                                    <p>${travel.dateAndTineDeparture.split('T')[0]}</p>
-                                  <p>à</p>
-                                  <p>${travel.dateAndTineDeparture.split('T')[1]}</p>
-                            </div>
-                           <div class="resultDepartureRegion">
-                               <p>${travel.departureRegion}, ${travel.departureTown}</p>
-                               <p>${travel.meet}</p>
-                               <br>
-                               <br>
-                               <p>${travel.arrivalRegion}, ${travel.arrivalTown}</p>
-                               <p>${travel.dropoffPoint}</p>
-                           </div>
-                           <div class="PriceAndPlacesResult">
-                               <p>${travel.price} FCFA</p>
-                               <p>${travel.seats} seats available</p>
-                           </div>
-                           
-                       </div>
-                   `).join('')}
-               </div>
-            </div>`;
            
+                                        if(userLogIn.emailRegister === emailInputLogin && userLogIn.passwordRegister ===  passwordInputLogin) {  
 
-    }
+                                            //console.log(userLogIn.emailRegister === emailInputLogin && userLogIn.passwordRegister ===  passwordInputLogin);
 
-    if (userLogIn.bookings && userLogIn.bookings.length > 0) {
-        logginSucess += `
-            <div class="listeDesVoyagesBooker">
-                ${userLogIn.bookings.map((booking, index) => {
-                    // Calculer le temps restant avant le départ
-                    const now = new Date();
-                    const departureDateTime = new Date(booking.dateAndTineDeparture);
-                    const timeDifference = departureDateTime - now;
-                    const hoursDifference = timeDifference / (1000 * 60 * 60); // Convertir en heures
-    
-                    // Vérifier si le voyage est dans moins de 24 heures
-                    const canModifyOrCancel = hoursDifference > 24;
-    
-                    return `
-                         <div>
-                                <div class="resultListVaoyageBooker">
-                                    <div>
-                                        <div class="resultTimeDatePublie">
-                                            <p>Départ le</p>
-                                            <p>${booking.dateAndTineDeparture.split('T')[0]}</p>
-                                            <p>à</p>
-                                            <p>${booking.dateAndTineDeparture.split('T')[1]}</p>
-                                        </div>
-                                        <br><br>
-                                        <div class="resultTimeDate">
-                                            <p>Réservé le</p>
-                                            <p>${new Date(booking.bookingDate).toLocaleDateString('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="resultDepartureRegion">
-                                        <p>${booking.departureRegion}, ${booking.departureCity}</p>
-                                        <p>${booking.meet}</p>
-                                        <br><br>
-                                        <p>${booking.arrivalRegion}, ${booking.arrivalCity}</p>
-                                        <p>${booking.dropOffPoint}</p>
-                                    </div>
-                                    <div class="PriceAndPlacesResult">
-                                        <p>${booking.price} FCFA</p>
-                                        <p>${booking.seatNumber} place(s) réservée(s)</p>
-                                    </div>
-            
-                                    
-                                </div>
+                                            userActif = userLogIn.usernameRegister; 
+                                            userActifId = userLogIn._id;
+                                            voyagePublies = userLogIn.travels.length; 
+                                            voageEffectue =  userLogIn.bookings.length; 
+                                            voyageannonce = totalVoyageAnnonceNbr;  
+                                            
 
-                                <div class="actionButtons">
-                                        <button class="deleteButton" data-booking-id="${booking._id}">Supprimer</button>
-                                        ${canModifyOrCancel ? `
-                                            <button class="modifyButton" data-booking-id="${booking._id}">Modifier</button>
-                                            <button class="cancelButton" data-booking-id="${booking._id}">Annuler</button>
-                                        ` : `
-                                            <p style="color:red;">Modification</p>
-                                            <p  style="color:red;">Annulation</p>
-                                            <p style="color:red;">impossible à moins de 24h</p>
-                                        `}
-                                    </div>
-                            </div>
-                    `;
-                }).join('')}
-            </div>
-        `;
-    }
-        
-               
-}else if (userLogIn.emailRegister !== emailInputLogin || userLogIn.passwordRegister !==  passwordInputLogin){
-                logginInvalid = `
-              
-                <body>
-                    <div class="loginPageFail">
-                        <h2 >Invalid login credential! please try again<h2>
-                        <h2>Login</h2>
-                        <form class="loginForm" action="/login" method="post">
-                            <input type="email" class="emailInput" name="emailInputLogin" placeholder="Enter your email adress" required>
-                            <input type="password" class="passwordinput" name="passwordInputLogin" placeholder="Enter your password" required>
-                            <button type="submit" value="Login" class="loginButton">Login</button>
-                            <p>Are you a Cheetah's Travellers Member?<a href="#" class="registerRedirection">Register</a></p>
-                        </form>
-                    </div>
-                </body>`; 
-             }
-        })
+                                            if (userLogIn.travels && userLogIn.travels.length >= 0){
+                                                    logginSucess= ` <div class="Bienvenu">
+                                                
+                                                    <h2>Salut ${userActif}, ravis de te revoir parmi nous </h2></div>
+
+                                                    <nav class="navbarLink">
+                                                        <div class="covoiturageAnnoncé">
+                                                        <div class="covoiturageAnnoncéTitre">Voyage annoncé</div>
+                                                        <div class="covoiturageAnnoncéNbr">${voyagePublies}</div>
+                                                        </div>
+                                                        <div class="covoiturageReserve">
+                                                        <div class="covoiturageReserveTitre">Voyage Reservé</div>
+                                                        <div class="covoiturageReserveNbr">${ voageEffectue}</div>
+                                                        </div>
+                                                        <div class="covoiturageFait">
+                                                        <div class="covoiturageFaitTitre">Les voyages publiés </div>
+                                                        <div class="totalCovoiturageAnnoncé">${voyageannonce}</div>
+                                                        </div>
+                                                    </nav>
+                                            
+                                                    <div class="travelbooking">
+                                                            <li><a href="#" class="announceAtrip">Announce a Trip</a></li>
+                                                            <li><a href="#" class="FindAtrip">Find a Trip</a></li>
+                                                    </div>
+
+                                                    <div class="announceTravelForm">
+                                                    <h2 class="annonceVoyageTitre"> Provide more details on your trip</h2>
+                                                    <form action="/submit" method="post">
+                                                        <label for="username">Username</label>
+                                                        <input id="username" name="username" type="text"><br><br>
+                                                        <label for="departureRegion">Region of Departure</label>
+                                                        <select id="departureRegion" name="departureRegion" required>
+                                                            <option value="ChooseRegion">Choose region of departure</option>
+                                                            <option value="Adamaoua">Adamaoua</option>
+                                                            <option value="Centre">Centre</option>
+                                                            <option value="Est">Est</option>
+                                                            <option value="Extrême-Nord">Extrême-Nord </option>
+                                                            <option value="Littoral">Littoral </option>
+                                                            <option value=" Nord"> Nord</option>
+                                                            <option value="Nord-Ouest">Nord-Ouest</option>
+                                                            <option value="Ouest">Ouest</option>
+                                                            <option value="Sud">Sud </option>
+                                                            <option value="Sud-ouest">Sud-ouest</option>
+                                                        </select>
+                                                    <br><br>
+                                                    <label for="departureTown">Departure city/town</label>
+                                                    <input type="text" id="departureTown" name="departureTown" required ><br><br>
+
+                                                    <label for="arrivalRegion">Region of Arrival</label>
+                                                    <select id="arrivalRegion" name="arrivalRegion" required>
+                                                        <option value="ChooseRegion">Choose region of arrival</option>
+                                                        <option value="Adamaoua">Adamaoua</option>
+                                                        <option value="Centre">Centre</option>
+                                                        <option value="Est">Est</option>
+                                                        <option value="Extrême-Nord">Extrême-Nord </option>
+                                                        <option value="Littoral">Littoral </option>
+                                                        <option value=" Nord"> Nord</option>
+                                                        <option value="Nord-Ouest">Nord-Ouest</option>
+                                                        <option value="Ouest">Ouest</option>
+                                                        <option value="Sud">Sud </option>
+                                                        <option value="Sud-ouest">Sud-ouest</option>
+                                                    </select>
+                                                    <br><br>
+
+                                                    <label for="arrivalTown">Arrival city/town</label>
+                                                    <input type="text" id="arrivalTown" name="arrivalTown" required><br><br>
+                                                    <label for="meet">Meet point</label>
+                                                    <input type="text" id="meet" name="meet" required ><br><br>
+                                                    <label for="dateAndTineDeparture">Date and hour of departure</label>
+                                                    <input type="datetime-local" id="dateAndTineDeparture" name="dateAndTineDeparture" required><br><br>
+                                                    <label for="drop-offPoint">Drop-off point</label>
+                                                    <input type="name" id="drop-offPoint" name="dropoffPoint" required ><br><br>
+                                                    <label for="seats">Available seats</label>
+                                                    <input type="number" id="seats" name="seats" required><br><br>
+                                                    <label for="price">Contribution in FCFA</label>
+                                                    <input type="number" id="price" name="price" required><br><br>
+                                                    <label for="paiementMode">paiement Mode</label>
+                                                    <select id="paiementMode" name="paiementMode" required>
+                                                        <option value="">Choose et paiement Mode</option>
+                                                        <option value="cash">Cash</option>
+                                                        <option value="Orange Money">Orange Money</option>
+                                                        <option value="momo">Mobile Money</option>
+                                                        <option value="card">Visa/Master Card</option>
+                                                        <option value="paypal">Paypal</option>
+                                                    </select>
+                                                <br><br>
+                                                <label for="driverLicenceNbr">Driver licence number</label>
+                                                <input id="driverLicenceNbr" type="number" name="driverLicenceNbr" minlength="12" maxlength="12"><br><br>
+                                                <label for="expireDate">Expire date</label>
+                                                <input type="date" id="expireDate" name="expireDate"><br><br>
+                                                <label for="issuePlace">Place of Issue</label>
+                                                <input type="name" id="issuePlace" name="issuePlace"><br><br>
+                                                <label for="Carimmatriculation">Car's immatriculation</label>
+                                                <input type="name" id="Carimmatriculation" name="Carimmatriculation"><br><br>
+                                                <label for="CarModel">Car's Model</label>
+                                                <input type="name" id="CarModel" name="CarModel"><br><br>
+                                                <label for="CarColor">Car's color</label>
+                                                <input type="string" id="CarColor" name="CarColor"><br><br>
+                                                <input type="submit" value="submit">
+                                                <input type="reset" value="reset">
+
+                                            </form>
+                                            
+                                            </div>
+
+                                                    
+
+                                            <div class="FindTraveilForm">
+                                                <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
+                                            <form action="/findTravel" method="post">
+                                                <label  for="departureRegionARR">Region of Departure</label>
+                                                <select id="departureRegionARR" name="departureRegionARR" required>
+                                                    <option value="ChooseRegion">Choose region of departure</option>
+                                                    <option value="Adamaoua">Adamaoua</option>
+                                                    <option value="Centre">Centre</option>
+                                                    <option value="Est">Est</option>
+                                                    <option value="Extrême-Nord">Extrême-Nord </option>
+                                                    <option value="Littoral">Littoral </option>
+                                                    <option value=" Nord"> Nord</option>
+                                                    <option value="Nord-Ouest">Nord-Ouest</option>
+                                                    <option value="Ouest">Ouest</option>
+                                                    <option value="Sud">Sud </option>
+                                                    <option value="Sud-ouest">Sud-ouest</option>
+                                                </select>
+                                                <br><br>
+                                                <label for="departureTownARR">Departure city/town</label>
+                                                <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
+
+                                                <label for="arrivalRegionARR">Region of Arrival</label>
+                                                <select id="arrivalRegionARR" name="arrivalRegionARR" required>
+                                                    <option value="ChooseRegion">Choose region of arrival</option>
+                                                    <option value="Adamaoua">Adamaoua</option>
+                                                    <option value="Centre">Centre</option>
+                                                    <option value="Est">Est</option>
+                                                    <option value="Extrême-Nord">Extrême-Nord </option>
+                                                    <option value="Littoral">Littoral </option>
+                                                    <option value=" Nord"> Nord</option>
+                                                    <option value="Nord-Ouest">Nord-Ouest</option>
+                                                    <option value="Ouest">Ouest</option>
+                                                    <option value="Sud">Sud </option>
+                                                    <option value="Sud-ouest">Sud-ouest</option>
+                                                </select>
+                                                <br><br>
+
+                                                <label for="arrivalTownARR">Arrival city/town</label>
+                                                <input type="text" id="arrivaPlTownARR" name="arrivalTownARR" required><br><br>
+                                                
+                                                <label for="dateAndTineDepartureARR">Date and hour of departure</label>
+                                                <input type="datetime-local" id="dateAndTineDepartureARR" name="dateAndTineDepartureARR" required><br><br>
+
+                                                <input type="submit" value="submit">
+                                                <input type="reset" value="reset">
+                                            </form>
+                                            </div>
+
+
+                                            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+                                                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+                                                `
+                                            
+                                            logginSucess += `
+                                            <div class="listeDesVoyagesContainer">
+                                                ${userLogIn.travels.map((travel, index) => `
+                                                    <div class="resultListVaoyagePublies">
+                                                        
+                                                        <div class="resultTimeDatePublie">
+                                                                <p>Départ le</p>
+                                                                    <p>${travel.dateAndTineDeparture.split('T')[0]}</p>
+                                                                <p>à</p>
+                                                                <p>${travel.dateAndTineDeparture.split('T')[1]}</p>
+                                                            </div>
+                                                        <div class="resultDepartureRegion">
+                                                            <p>${travel.departureRegion}, ${travel.departureTown}</p>
+                                                            <p>${travel.meet}</p>
+                                                            <br>
+                                                            <br>
+                                                            <p>${travel.arrivalRegion}, ${travel.arrivalTown}</p>
+                                                            <p>${travel.dropoffPoint}</p>
+                                                        </div>
+                                                        <div class="PriceAndPlacesResult">
+                                                            <p>${travel.price} FCFA</p>
+                                                            <p>${travel.seats} seats available</p>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                `).join('')}
+                                                    </div>
+                                                </div>`;
+                                            }
+
+                                                            if (userLogIn.bookings && userLogIn.bookings.length > 0) {
+                                                                logginSucess += `
+                                                                <div class="listeDesVoyagesBooker">
+                                                                ${userLogIn.bookings.map((booking, index) => {
+                                                                    // Calculer le temps restant avant le départ
+                                                                    const now = new Date();
+                                                                    const departureDateTime = new Date(booking.dateAndTineDeparture);
+                                                                    const timeDifference = departureDateTime - now;
+                                                                    const hoursDifference = timeDifference / (1000 * 60 * 60); // Convertir en heures
+                                                    
+                                                                    // Vérifier si le voyage est dans moins de 24 heures
+                                                                    const canModifyOrCancel = hoursDifference > 24;
+                                                    
+                                                                    return `
+                                                                        <div>
+                                                                                <div class="resultListVaoyageBooker">
+                                                                                    <div>
+                                                                                        <div class="resultTimeDatePublie">
+                                                                                            <p>Départ le</p>
+                                                                                            <p>${booking.dateAndTineDeparture.split('T')[0]}</p>
+                                                                                            <p>à</p>
+                                                                                            <p>${booking.dateAndTineDeparture.split('T')[1]}</p>
+                                                                                        </div>
+                                                                                        <br><br>
+                                                                                        <div class="resultTimeDate">
+                                                                                            <p>Réservé le</p>
+                                                                                            <p>${new Date(booking.bookingDate).toLocaleDateString('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div class="resultDepartureRegion">
+                                                                                        <p>${booking.departureRegion}, ${booking.departureCity}</p>
+                                                                                        <p>${booking.meet}</p>
+                                                                                        <br><br>
+                                                                                        <p>${booking.arrivalRegion}, ${booking.arrivalCity}</p>
+                                                                                        <p>${booking.dropOffPoint}</p>
+                                                                                    </div>
+                                                                                    <div class="PriceAndPlacesResult">
+                                                                                        <p>${booking.price} FCFA</p>
+                                                                                        <p>${booking.seatNumber} place(s) réservée(s)</p>
+                                                                                    </div>
+                                                            
+                                                                                    
+                                                                                </div>
+
+                                                                                <div class="actionButtons">
+                                                                                        <button class="deleteButton" data-booking-id="${booking._id}">Supprimer</button>
+                                                                                        ${canModifyOrCancel ? `
+                                                                                            <button class="modifyButton" data-booking-id="${booking._id}">Modifier</button>
+                                                                                            <button class="cancelButton" data-booking-id="${booking._id}">Annuler</button>
+                                                                                        ` : `
+                                                                                            <p style="color:red;">Modification</p>
+                                                                                            <p  style="color:red;">Annulation</p>
+                                                                                            <p style="color:red;">impossible à moins de 24h</p>
+                                                                                        `}
+                                                                                    </div>
+                                                                            </div>
+                                                                    `;
+                                                                }).join('')}
+                                                            </div>
+                                                        `;
+                                                        }
+                
+                                                            
+                                                        }else if (userLogIn.emailRegister !== emailInputLogin || userLogIn.passwordRegister !==  passwordInputLogin){
+                                                            console.log(userLogIn.emailRegister !== emailInputLogin && userLogIn.passwordRegister !==  passwordInputLogin);
+                                                                logginInvalid = `
+                                                            
+                                                                <body>
+                                                                    <div class="loginPageFail">
+                                                                        <h2 >Invalid login credential! please try again<h2>
+                                                                        <h2>Login</h2>
+                                                                        <form class="loginForm" action="/login" method="post">
+                                                                            <input type="email" class="emailInput" name="emailInputLogin" placeholder="Enter your email adress" required>
+                                                                            <input type="password" class="passwordinput" name="passwordInputLogin" placeholder="Enter your password" required>
+                                                                            <button type="submit" value="Login" class="loginButton">Login</button>
+                                                                            <p>Are you a Cheetah's Travellers Member?<a href="#" class="registerRedirection">Register</a></p>
+                                                                        </form>
+                                                                    </div>
+                                                                </body>`; 
+                                                            }
+                                                        })
+                                                
             if(logginSucess){
                 fs.readFile(path.join(__dirname, 'annonceVoyage.htm'), function (err, data) {
                     if (err) throw err;
@@ -411,6 +453,7 @@ app.post('/login', async(req, res)=>{
                     res.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>'); 
                     res.write(data);
                     res.write(logginSucess);
+                    res.write(`<div class="resultTotalVoyageListPublieContainer">${nombreTotalDeVoyagePublieValide}</div>`); 
                     res.end();
                  }); 
             

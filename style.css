@@ -247,9 +247,13 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     display: grid; 
     grid-template-columns: auto auto auto; 
 }
+.resultTotalVoyageListPublieContainer{
+    display: none; 
+
+}
 
 /* Style pour chaque élément de la grille */
-.result{
+.result, .resultTotalVoyageListPublie{
     display: flex;
     justify-content: space-between;
     margin: 20px;

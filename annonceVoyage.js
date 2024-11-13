@@ -18,6 +18,7 @@ $(document).ready(function(){
         $(".listeDesVoyagesContainer").css("display", "none"); 
         $(".listeDesVoyagesBooker").css("display", "none");
         $(".FindTraveilForm").css("display", "block"); 
+        $(".resultTotalVoyageListPublieContainer").css("display", "none"); 
          
     })
     $(".announceAtripLogged").click(function(){
@@ -34,6 +35,7 @@ $(document).ready(function(){
         $(".listeDesVoyagesBooker").css("display", "none");
         $(".FindTraveilForm").css("display", "none"); 
         $(".announceTravelForm").css("display","none"); 
+        $(".resultTotalVoyageListPublieContainer").css("display", "none"); 
     });
 
 
@@ -47,7 +49,20 @@ $(document).ready(function(){
         $(".listeDesVoyagesContainer").css("display", "none"); 
         $(".FindTraveilForm").css("display", "none"); 
         $(".announceTravelForm").css("display","none"); 
+        $(".resultTotalVoyageListPublieContainer").css("display", "none"); 
     });
+
+    $(".covoiturageFait").on("click", function(event){
+        event.preventDefault();
+            $(".resultTotalVoyageListPublieContainer").css({
+                "display": "grid", 
+                "grid-template-columns": "repeat(3, 1fr)",  // 4 colonnes égales
+                "gap": "10px"  // espace entre les éléments
+            });
+            $(".listeDesVoyagesContainer").css("display", "none"); 
+            $(".FindTraveilForm").css("display", "none"); 
+            $(".announceTravelForm").css("display","none"); 
+    })
 
 
     
@@ -58,6 +73,7 @@ $(document).ready(function(){
         $(".aucunVoyageTrouver").css("display", "none"); 
         $(".listeDesVoyagesBooker").css("display", "none");
         $(".listeDesVoyagesContainer").css("display", "none"); 
+        $(".resultTotalVoyageListPublieContainer").css("display", "none"); 
         $(".announceTravelForm").css("display","block"); 
       
         const loginClass = $(".loginBtn");
