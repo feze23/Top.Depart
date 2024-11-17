@@ -203,25 +203,28 @@ app.post('/login', async(req, res)=>{
                                                         <label for="username">Username</label>
                                                         <input id="username" name="username" type="text"><br><br>
                                                         <label for="departureRegion">Region of Departure</label>
-                                                        <select id="departureRegion" name="departureRegion" required>
+                                                        <input list="cityList" id="departureRegion" name="departureRegion" required>
+                                                        <datalist id="cityList">
                                                             <option value="ChooseRegion">Choose region of departure</option>
                                                             <option value="Adamaoua">Adamaoua</option>
                                                             <option value="Centre">Centre</option>
                                                             <option value="Est">Est</option>
-                                                            <option value="Extrême-Nord">Extrême-Nord </option>
-                                                            <option value="Littoral">Littoral </option>
-                                                            <option value=" Nord"> Nord</option>
+                                                            <option value="Extrême-Nord">Extrême-Nord</option>
+                                                            <option value="Littoral">Littoral</option>
+                                                            <option value="Nord">Nord</option>
                                                             <option value="Nord-Ouest">Nord-Ouest</option>
                                                             <option value="Ouest">Ouest</option>
-                                                            <option value="Sud">Sud </option>
-                                                            <option value="Sud-ouest">Sud-ouest</option>
-                                                        </select>
+                                                            <option value="Sud">Sud</option>
+                                                            <option value="Sud-Ouest">Sud-Ouest</option>
+                                                        </datalist>
+
                                                     <br><br>
                                                     <label for="departureTown">Departure city/town</label>
                                                     <input type="text" id="departureTown" name="departureTown" required ><br><br>
 
                                                     <label for="arrivalRegion">Region of Arrival</label>
-                                                    <select id="arrivalRegion" name="arrivalRegion" required>
+                                                    <input list="cityList" id="arrivalRegion" name="arrivalRegion" required>
+                                                     <datalist id="cityList">
                                                         <option value="ChooseRegion">Choose region of arrival</option>
                                                         <option value="Adamaoua">Adamaoua</option>
                                                         <option value="Centre">Centre</option>
@@ -233,7 +236,7 @@ app.post('/login', async(req, res)=>{
                                                         <option value="Ouest">Ouest</option>
                                                         <option value="Sud">Sud </option>
                                                         <option value="Sud-ouest">Sud-ouest</option>
-                                                    </select>
+                                                    </datalist>
                                                     <br><br>
 
                                                     <label for="arrivalTown">Arrival city/town</label>
@@ -283,7 +286,8 @@ app.post('/login', async(req, res)=>{
                                                 <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
                                             <form action="/findTravel" method="post">
                                                 <label  for="departureRegionARR">Region of Departure</label>
-                                                <select id="departureRegionARR" name="departureRegionARR" required>
+                                                <input list="cityList" id="departureRegionARR" name="departureRegionARR" required>
+                                                <datalist id="cityList"
                                                     <option value="ChooseRegion">Choose region of departure</option>
                                                     <option value="Adamaoua">Adamaoua</option>
                                                     <option value="Centre">Centre</option>
@@ -295,13 +299,14 @@ app.post('/login', async(req, res)=>{
                                                     <option value="Ouest">Ouest</option>
                                                     <option value="Sud">Sud </option>
                                                     <option value="Sud-ouest">Sud-ouest</option>
-                                                </select>
+                                                </datalist>
                                                 <br><br>
                                                 <label for="departureTownARR">Departure city/town</label>
                                                 <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
 
                                                 <label for="arrivalRegionARR">Region of Arrival</label>
-                                                <select id="arrivalRegionARR" name="arrivalRegionARR" required>
+                                                <input list="cityList" id="arrivalRegionARR" name="arrivalRegionARR" required>
+                                                <datalist id="cityList"
                                                     <option value="ChooseRegion">Choose region of arrival</option>
                                                     <option value="Adamaoua">Adamaoua</option>
                                                     <option value="Centre">Centre</option>
@@ -313,7 +318,7 @@ app.post('/login', async(req, res)=>{
                                                     <option value="Ouest">Ouest</option>
                                                     <option value="Sud">Sud </option>
                                                     <option value="Sud-ouest">Sud-ouest</option>
-                                                </select>
+                                                </datalist>
                                                 <br><br>
 
                                                 <label for="arrivalTownARR">Arrival city/town</label>
@@ -596,7 +601,8 @@ app.post('/submit', async(req, res) => {
                 <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
             <form action="/findTravel" method="post">
                 <label  for="departureRegionARR">Region of Departure</label>
-                <select id="departureRegionARR" name="departureRegionARR" required>
+                <input list="cityList" id="departureRegionARR" name="departureRegionARR" required>
+                <datalist id="cityList">
                     <option value="ChooseRegion">Choose region of departure</option>
                     <option value="Adamaoua">Adamaoua</option>
                     <option value="Centre">Centre</option>
@@ -608,13 +614,14 @@ app.post('/submit', async(req, res) => {
                     <option value="Ouest">Ouest</option>
                     <option value="Sud">Sud </option>
                     <option value="Sud-ouest">Sud-ouest</option>
-                </select>
+                </datalist>
                 <br><br>
                 <label for="departureTownARR">Departure city/town</label>
                 <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
 
                 <label for="arrivalRegionARR">Region of Arrival</label>
-                <select id="arrivalRegionARR" name="arrivalRegionARR" required>
+                <input list="cityList" id="arrivalRegionARR" name="arrivalRegionARR" required>
+                <datalist id="cityList">
                     <option value="ChooseRegion">Choose region of arrival</option>
                     <option value="Adamaoua">Adamaoua</option>
                     <option value="Centre">Centre</option>
@@ -626,7 +633,7 @@ app.post('/submit', async(req, res) => {
                     <option value="Ouest">Ouest</option>
                     <option value="Sud">Sud </option>
                     <option value="Sud-ouest">Sud-ouest</option>
-                </select>
+                </datalist>
                 <br><br>
 
                 <label for="arrivalTownARR">Arrival city/town</label>
@@ -994,7 +1001,7 @@ app.get('/booking', async (req, res) => {
         // Vérifiez que l'ID de l'utilisateur est valide
         if (!ObjectId.isValid(userId)) {
             console.error('ID d\'utilisateur invalide:', userId);
-            return res.status(400).send('ID d\'utilisateur invalide.');
+            return res.status(400).send("Vous n'êtes pas membre de la communauté Top Départ? cliquer ici pour vous enregistrer");
         }
 
         const seatNumber = Number(seatNumberString);

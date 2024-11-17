@@ -23,10 +23,10 @@
             </div> 
             <ul>
                 <li><a href="#">Accueil</a></li>
-                <li class="dropdown">
+                <li class="dropdown btnAnnonceVoyage">
                     <a href="#">Annoncer un voyage</a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown btnTrouveVoyage">
                     <a href="#">Trouver un voyage</a>
                 </li>
                 <li class="contactMenu"><a href="#">Se connecter</a></li>
@@ -94,135 +94,248 @@
 
     
 
-<!---
-    <div class="announceTravelForm">
-        <h2 class="annonceVoyageTitre"> Provide more details on your trip</h2>
-    <form action="/submit" method="post">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text"><br><br>
-        <label for="departureRegion">Region of Departure</label>
-        <select id="departureRegion" name="departureRegion" required>
-            <option value="ChooseRegion">Choose region of departure</option>
-            <option value="Adamaoua">Adamaoua</option>
-            <option value="Centre">Centre</option>
-            <option value="Est">Est</option>
-            <option value="Extrême-Nord">Extrême-Nord </option>
-            <option value="Littoral">Littoral </option>
-            <option value=" Nord"> Nord</option>
-            <option value="Nord-Ouest">Nord-Ouest</option>
-            <option value="Ouest">Ouest</option>
-            <option value="Sud">Sud </option>
-            <option value="Sud-ouest">Sud-ouest</option>
-        </select>
-        <br><br>
-        <label for="departureTown">Departure city/town</label>
-        <input type="text" id="departureTown" name="departureTown" required ><br><br>
 
-        <label for="arrivalRegion">Region of Arrival</label>
-        <select id="arrivalRegion" name="arrivalRegion" required>
-            <option value="ChooseRegion">Choose region of arrival</option>
-            <option value="Adamaoua">Adamaoua</option>
-            <option value="Centre">Centre</option>
-            <option value="Est">Est</option>
-            <option value="Extrême-Nord">Extrême-Nord </option>
-            <option value="Littoral">Littoral </option>
-            <option value=" Nord"> Nord</option>
-            <option value="Nord-Ouest">Nord-Ouest</option>
-            <option value="Ouest">Ouest</option>
-            <option value="Sud">Sud </option>
-            <option value="Sud-ouest">Sud-ouest</option>
-        </select>
-        <br><br>
 
-        <label for="arrivalTown">Arrival city/town</label>
-        <input type="text" id="arrivalTown" name="arrivalTown" required><br><br>
-        <label for="meet">Meet point</label>
-        <input type="text" id="meet" name="meet" required ><br><br>
-        <label for="dateAndTineDeparture">Date and hour of departure</label>
-        <input type="datetime-local" id="dateAndTineDeparture" name="dateAndTineDeparture" required><br><br>
-        <label for="drop-offPoint">Drop-off point</label>
-        <input type="name" id="drop-offPoint" name="dropoffPoint" required ><br><br>
-        <label for="seats">Available seats</label>
-        <input type="number" id="seats" name="seats" required><br><br>
-        <label for="price">Contribution in FCFA</label>
-        <input type="number" id="price" name="price" required><br><br>
-        <label for="paiementMode">paiement Mode</label>
-        <select id="paiementMode" name="paiementMode" required>
-            <option value="">Choose et paiement Mode</option>
-            <option value="cash">Cash</option>
-            <option value="Orange Money">Orange Money</option>
-            <option value="momo">Mobile Money</option>
-            <option value="card">Visa/Master Card</option>
-            <option value="paypal">Paypal</option>
-        </select>
-        <br><br>
-        <label for="driverLicenceNbr">Driver licence number</label>
-        <input id="driverLicenceNbr" type="number" name="driverLicenceNbr" minlength="12" maxlength="12"><br><br>
-        <label for="expireDate">Expire date</label>
-        <input type="date" id="expireDate" name="expireDate"><br><br>
-        <label for="issuePlace">Place of Issue</label>
-        <input type="name" id="issuePlace" name="issuePlace"><br><br>
-        <label for="Carimmatriculation">Car's immatriculation</label>
-        <input type="name" id="Carimmatriculation" name="Carimmatriculation"><br><br>
-        <label for="CarModel">Car's Model</label>
-        <input type="name" id="CarModel" name="CarModel"><br><br>
-        <label for="CarColor">Car's color</label>
-        <input type="string" id="CarColor" name="CarColor"><br><br>
-        <input type="submit" value="submit">
-        <input type="reset" value="reset">
+        <div  class="findTravelHomePageContent">
+            <div class="aProposDeTopDepart">
+                <div class="aProposDeTopDepartText">
+                    <h1>Top Départ</h1>
+                    <h3>Plus que covoiturer, rencontrer, socialiser et partager</h3>
+                </div>
+                
+            </div>
+            <div class="trouverUnVoyageContent">
+                <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
+                <form action="/findTravel" method="post">
+                    <label for="departureRegionARR">Region of Departure</label>
+                    <input list="cityList" id="departureRegionARR" name="departureRegionARR" required>
+                    <datalist id="cityList">
+                        <option value="ChooseRegion">Choose region of departure</option>
+                        <option value="Adamaoua">Adamaoua</option>
+                        <option value="Centre">Centre</option>
+                        <option value="Est">Est</option>
+                        <option value="Extrême-Nord">Extrême-Nord </option>
+                        <option value="Littoral">Littoral </option>
+                        <option value=" Nord"> Nord</option>
+                        <option value="Nord-Ouest">Nord-Ouest</option>
+                        <option value="Ouest">Ouest</option>
+                        <option value="Sud">Sud </option>
+                        <option value="Sud-ouest">Sud-ouest</option>
+                    </datalist>
+                    <br><br>
+                    <label for="departureTownARR">Departure city/town</label>
+                    <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
 
-    </form>
-    
-    </div> -->
+                    <label for="arrivalRegionARR">Region of Arrival</label>
+                    <input list="cityList" id="arrivalRegionARR" name="arrivalRegionARR" required>
+                    <datalist id="cityList">
+                        <option value="ChooseRegion">Choose region of arrival</option>
+                        <option value="Adamaoua">Adamaoua</option>
+                        <option value="Centre">Centre</option>
+                        <option value="Est">Est</option>
+                        <option value="Extrême-Nord">Extrême-Nord </option>
+                        <option value="Littoral">Littoral </option>
+                        <option value=" Nord"> Nord</option>
+                        <option value="Nord-Ouest">Nord-Ouest</option>
+                        <option value="Ouest">Ouest</option>
+                        <option value="Sud">Sud </option>
+                        <option value="Sud-ouest">Sud-ouest</option>
+                    </datalist>
+                    <br><br>
 
-  <!--- <div class="FindTraveilForm">
-        <h2 class="rechercheYoyageTitre"> Find a Travel</h2>
-    <form action="/findTravel" method="post">
-        <label for="departureRegionARR">Region of Departure</label>
-        <select id="departureRegionARR" name="departureRegionARR" required>
-            <option value="ChooseRegion">Choose region of departure</option>
-            <option value="Adamaoua">Adamaoua</option>
-            <option value="Centre">Centre</option>
-            <option value="Est">Est</option>
-            <option value="Extrême-Nord">Extrême-Nord </option>
-            <option value="Littoral">Littoral </option>
-            <option value=" Nord"> Nord</option>
-            <option value="Nord-Ouest">Nord-Ouest</option>
-            <option value="Ouest">Ouest</option>
-            <option value="Sud">Sud </option>
-            <option value="Sud-ouest">Sud-ouest</option>
-        </select>
-        <br><br>
-        <label for="departureTownARR">Departure city/town</label>
-        <input type="text" id="departureTownARR" name="departureTownARR" required ><br><br>
+                    <label for="arrivalTownARR">Arrival city/town</label>
+                    <input type="text" id="arrivalTownARR" name="arrivalTownARR" required><br><br>
+                    
+                    <label for="dateAndTineDepartureARR">Date and hour of departure</label>
+                    <input type="datetime-local" id="dateAndTineDepartureARR" name="dateAndTineDepartureARR" required><br><br>
 
-        <label for="arrivalRegionARR">Region of Arrival</label>
-        <select id="arrivalRegionARR" name="arrivalRegionARR" required>
-            <option value="ChooseRegion">Choose region of arrival</option>
-            <option value="Adamaoua">Adamaoua</option>
-            <option value="Centre">Centre</option>
-            <option value="Est">Est</option>
-            <option value="Extrême-Nord">Extrême-Nord </option>
-            <option value="Littoral">Littoral </option>
-            <option value=" Nord"> Nord</option>
-            <option value="Nord-Ouest">Nord-Ouest</option>
-            <option value="Ouest">Ouest</option>
-            <option value="Sud">Sud </option>
-            <option value="Sud-ouest">Sud-ouest</option>
-        </select>
-        <br><br>
+                    <input type="submit" value="submit">
+                    <input type="reset" value="reset">
+                </form>
 
-        <label for="arrivalTownARR">Arrival city/town</label>
-        <input type="text" id="arrivalTownARR" name="arrivalTownARR" required><br><br>
+            </div>
+
+            <div class="announceTravelFormHomePage">
+                <h2 class="annonceVoyageTitre"> Provide more details on your trip</h2>
+                <form action="/submit" method="post">
+                    <div class="InformationSurLeDepart">
+                       
+                        <h3>Information sur le départ</h3>
+
+                        <label for="username">Username</label>
+                        <input id="username" name="username" type="text" value=""><br><br>
+                        <label for="departureRegion">Region of Departure</label>
+                        <select id="departureRegion" name="departureRegion" required>
+                            <option value="ChooseRegion">Choose region of departure</option>
+                            <option value="Adamaoua">Adamaoua</option>
+                            <option value="Centre">Centre</option>
+                            <option value="Est">Est</option>
+                            <option value="Extrême-Nord">Extrême-Nord </option>
+                            <option value="Littoral">Littoral </option>
+                            <option value=" Nord"> Nord</option>
+                            <option value="Nord-Ouest">Nord-Ouest</option>
+                            <option value="Ouest">Ouest</option>
+                            <option value="Sud">Sud </option>
+                            <option value="Sud-ouest">Sud-ouest</option>
+                        </select>
+                        <br><br>
+                        <label for="departureTown">Departure city/town</label>
+                        <input type="text" id="departureTown" name="departureTown" value="" required ><br><br>
+                        <label for="meet">Meet point</label>
+                        <input type="text" id="meet" name="meet" value="" required ><br><br>
+                        <label for="dateAndTineDeparture">Date and hour of departure</label>
+                        <input type="datetime-local" id="dateAndTineDeparture" name="dateAndTineDeparture"  required><br><br>
+                        <button id="btnNextInformationSurLeDepart">suivant</button>
+                    </div>
+
+                    <div class="informationSurLarrivee">
+                        <h3>Informations sur l'arrivée</h3>
+                        <label for="arrivalRegion">Region of Arrival</label>
+                        <select id="arrivalRegion" name="arrivalRegion" required>
+                            <option value="ChooseRegion">Choose region of arrival</option>
+                            <option value="Adamaoua">Adamaoua</option>
+                            <option value="Centre">Centre</option>
+                            <option value="Est">Est</option>
+                            <option value="Extrême-Nord">Extrême-Nord </option>
+                            <option value="Littoral">Littoral </option>
+                            <option value=" Nord"> Nord</option>
+                            <option value="Nord-Ouest">Nord-Ouest</option>
+                            <option value="Ouest">Ouest</option>
+                            <option value="Sud">Sud </option>
+                            <option value="Sud-ouest">Sud-ouest</option>
+                        </select>
+                        <br><br>
+                        <label for="arrivalTown">Arrival city/town</label>
+                        <input type="text" id="arrivalTown" name="arrivalTown" required><br><br>
+                        <label for="drop-offPoint">Drop-off point</label>
+                        <input type="name" id="drop-offPoint" name="dropoffPoint" required ><br><br>
+                        <label for="price">Contribution in FCFA</label>
+                        <input type="number" id="price" name="price" required><br><br>
+                        <label for="paiementMode">paiement Mode</label>
+                        <select id="paiementMode" name="paiementMode" required>
+                            <option value="">Choose et paiement Mode</option>
+                            <option value="cash">Cash</option>
+                            <option value="Orange Money">Orange Money</option>
+                            <option value="momo">Mobile Money</option>
+                            <option value="card">Visa/Master Card</option>
+                            <option value="paypal">Paypal</option>
+                        </select>
+                        <button id="btnNextInformationSurLarrivee">suivant</button><br>
+                    </div>
+
+                    <div class="InformationSurLesPassagers">
+                        <h3>Informations sur les passagers</h3>
+                        <label for="seats">Available seats</label>
+                        <input type="number" id="seats" name="seats" required><br><br>
+                        <h4>Bagage à main accepté?</h4>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="bagageMainAccepte">OUI</label>
+                            <input type="radio" id="bagageMainAccepte" name="bagageMainAccepte" value="OUI">
+                            
+                          </div>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="bagageMainNonAccepte">NON</label>
+                            <input type="radio" id="bagageMainNonAccepte" name="bagageMainNonAccepte" value="NON">
+                            
+                        </div><br><br>
+
+                        <h4>Bagage en soute accepté?</h4>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="bagageEnSouteAccepte">OUI</label>
+                            <input type="radio" id="bagageEnSouteAccepte" name="bagageEnSouteAccepte" value="OUI">
+                            
+                          </div>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="bagageEnSouteNonAccepte">NON</label>
+                            <input type="radio" id="bagageEnSouteNonAccepte" name="bagageEnSouteNonAccepte" value="NON">
+                            
+                        </div><br><br>
+
+                        <h4>Animaux acceptés</h4>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="AnimauxAcceptés">OUI</label>
+                            <input type="radio" id="AnimauxAcceptés" name="AnimauxAcceptés" value="OUI">
+                            
+                          </div>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="AnimauxNonAcceptés">NON</label>
+                            <input type="radio" id="AnimauxNonAcceptés" name="AnimauxNonAcceptés" value="NON">
+                            
+                        </div>
+                        <button id="btnNextInformationSurLesPassagers">suivant</button><br>
+                    </div>
+                    
+                    <div class="informationsSurLeConducteur">
+
+                        <h3>Information sur le conducteur</h3>
+
+                        <label for="driverLicenceNbr">Driver licence number</label>
+                        <input id="driverLicenceNbr" type="number" name="driverLicenceNbr" minlength="12" maxlength="12"><br><br>
+                        <label for="expireDate">Expire date</label>
+                        <input type="date" id="expireDate" name="expireDate"><br><br>
+                        <label for="issuePlace">Place of Issue</label>
+                        <input type="name" id="issuePlace" name="issuePlace"><br><br>
+
+                        <h4>Voulez-vous que les passagers aient accès à votre numéro de téléphone?</h4>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="accesAccorde">OUI</label>
+                            <input type="radio" id="accesAccorde" name="accesAccorde" value="OUI">
+                            
+                          </div>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="accesRefuse">NON</label>
+                            <input type="radio" id="accesRefuse" name="accesRefuse" value="NON">
+                            
+                        </div><br>
+
+                        <h4>Voulez-vous que les passagers aient accès à votre adresse courriel?</h4>
+
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="accesAccordeEmail">OUI</label>
+                            <input type="radio" id="accesAccordeEmail" name="accesAccordeEmail" value="OUI">
+                            
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            <label for="accesrefuseEmail">NON</label>
+                            <input type="radio" id="accesrefuseEmail" name="accesrefuseEmail" value="NON">
+                            
+                        </div><br>
+                        <label for="NuméroDeCNI">Numéro de CNI</label>
+                        <input type="number" id="NuméroDeCNI" name="NuméroDeCNI"><br><br>
+
+                        <label for="LieuDeDélivrance">Lieu de délivrance</label>
+                        <input type="name" id="LieuDeDélivrance" name="LieuDeDélivrance"><br><br>
+
+                        <label for="DateExpiration">Date d'expiration</label>
+                        <input type="date" id="DateExpiration" name="DateExpiration"><br><br>
+                        <button id="btnNextInformationSurLeConducteur">suivant</button><br>
+                    </div>
+
+                    <div class="DescriptionDuVéhicule">
+                        <h3>Description du véhicule</h3>
+                        <label for="Carimmatriculation">Car's immatriculation</label>
+                        <input type="name" id="Carimmatriculation" name="Carimmatriculation"><br><br>
+                        <label for="CarModel">Car's Model</label>
+                        <input type="name" id="CarModel" name="CarModel"><br><br>
+                        <label for="marqueDuVehicule">Marque du véhicule</label>
+                        <input type="name" id="marqueDuVehicule" name="marqueDuVehicule"><br><br>
+                        <label for="CarColor">Car's color</label>
+                        <input type="string" id="CarColor" name="CarColor"><br><br>
+                        <input type="submit" value="submit">
+                        <input type="reset" value="reset">
+                    </div>
         
-        <label for="dateAndTineDepartureARR">Date and hour of departure</label>
-        <input type="datetime-local" id="dateAndTineDepartureARR" name="dateAndTineDepartureARR" required><br><br>
-
-        <input type="submit" value="submit">
-        <input type="reset" value="reset">
-    </form>
-    </div> -->
-
+                </form>
+            
+            </div>
+         </div>
     
+
+         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

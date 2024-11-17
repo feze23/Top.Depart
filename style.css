@@ -13,6 +13,9 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+/* I- mise en forme de la page d'accueil */
+
+    /* 1- mise en forme du header (logo et menu) */
 
 header{
     display: flex;
@@ -127,6 +130,56 @@ li.dropdown a, .announceAtrip, .FindAtrip {
     display: none;
 }
 
+/* 2- Mise en forme du formulaire pour trouver un voyage dans la page d'accueil */
+
+.findTravelHomePageContent{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid red; 
+}
+
+.aProposDeTopDepart{
+    border: 2px solid greenyellow;
+    width: 20%;
+    margin-left: 15%;
+   
+}
+.aProposDeTopDepartText{
+    margin-top: 45%;
+}
+
+.trouverUnVoyageContent{
+    border: 2px solid yellow; 
+    width: 45%;
+}
+
+.announceTravelFormHomePage{
+    border: 2px solid red;
+    display: none;
+    width: 45%;
+}
+
+#btnNextInformationSurLeDepart, #btnNextInformationSurLarrivee, #btnNextInformationSurLesPassagers, #btnNextInformationSurLeConducteur{
+    border-radius: 5px;
+    border-color: rgba(26, 107, 2, 0.818);
+    width: 20%;
+    height: 30px;
+    margin-top: 23px;
+    margin-left: 80%; 
+    background-color: rgba(26, 107, 2, 0.818);
+    color: white;
+}
+.informationSurLarrivee, .InformationSurLesPassagers, .informationsSurLeConducteur, .DescriptionDuVéhicule{
+    display: none;
+}
+
+
+
+
+
+
+
+/* mise en forme dans index.js */
 .announceTravelForm{
     display: none;
 }

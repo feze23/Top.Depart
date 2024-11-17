@@ -7,6 +7,66 @@ $(document).ready(function(){
 
           $(".registerPage").css("display", "none"); 
           $(".AproposBloc").css("display", "none"); 
+          $(".findTravelHomePageContent").css("display", "none"); 
+        
+    })
+
+    // Gestion du bouton suivant de la rubrique information sur le départ
+
+    $("#btnNextInformationSurLeDepart").on("click", function(event){
+        event.preventDefault();
+        
+        $(".informationSurLarrivee").css("display", "block"); 
+        $(".InformationSurLeDepart").css("display", "none");
+        $(".InformationSurLesPassagers").css("display", "none"); 
+        $(".informationsSurLeConducteur").css("display", "none"); 
+        $("..DescriptionDuVéhicule").css("display", "none");
+    })
+
+    // Gestion du bouton suivant de la rubrique information sur l'arrivée
+
+    $("#btnNextInformationSurLarrivee").on("click", function(event){
+        event.preventDefault();
+        $(".informationSurLarrivee").css("display", "none"); 
+        $(".InformationSurLeDepart").css("display", "none");
+        $(".InformationSurLesPassagers").css("display", "block"); 
+        $(".informationsSurLeConducteur").css("display", "none"); 
+        $(".DescriptionDuVéhicule").css("display", "none");
+    })
+
+     // Gestion du bouton suivant de la rubrique information sur les passagers
+
+     $("#btnNextInformationSurLesPassagers").on("click", function(event){
+        event.preventDefault();
+        $(".informationSurLarrivee").css("display", "none"); 
+        $(".InformationSurLeDepart").css("display", "none");
+        $(".InformationSurLesPassagers").css("display", "none"); 
+        $(".informationsSurLeConducteur").css("display", "block"); 
+        $(".DescriptionDuVéhicule").css("display", "none");
+    })
+
+    // Gestion du bouton suivant de la rubrique information sur le conducteur
+
+    $("#btnNextInformationSurLeConducteur").on("click", function(event){
+        event.preventDefault();
+        $(".informationSurLarrivee").css("display", "none"); 
+        $(".InformationSurLeDepart").css("display", "none");
+        $(".InformationSurLesPassagers").css("display", "none"); 
+        $(".informationsSurLeConducteur").css("display", "none"); 
+        $(".DescriptionDuVéhicule").css("display", "block");
+    })
+
+    $(".btnAnnonceVoyage").on("click", function(event){
+        event.preventDefault();
+        $(".trouverUnVoyageContent").css("display", "none"); 
+        $(".announceTravelFormHomePage").css("display", "block");
+
+    })
+
+    $(".btnTrouveVoyage").on("click", function(event){
+        event.preventDefault();
+        $(".trouverUnVoyageContent").css("display", "block"); 
+        $(".announceTravelFormHomePage").css("display", "none");
         
     })
 
